@@ -83,3 +83,6 @@ The important aspects here are:
 
   - This doesn't mean it must be immediately before `InstallFinalize`, but it should not be after it otherwise the rollback will not be performed.
 
+Another important note:
+
+- Because the custom action that we have in this example makes updates to the system, it must be sequenced only in the `InstallExecuteSequence` and not in the `InstallUISequence`. We know that the custom action is one that updates the system because otherwise it makes no sense to have an associated rollback custom action.

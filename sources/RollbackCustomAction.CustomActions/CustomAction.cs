@@ -16,7 +16,7 @@
 
 using Microsoft.Deployment.WindowsInstaller;
 
-namespace RollbackCustomAction.CustomActions
+namespace DustInTheWind.RollbackCustomAction.CustomActions
 {
     public static class CustomActions
     {
