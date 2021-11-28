@@ -1,0 +1,1 @@
+msiexec /x RollbackCustomAction.msi /l*vx uninstall.log
