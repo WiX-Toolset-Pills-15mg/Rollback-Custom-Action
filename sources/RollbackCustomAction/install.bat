@@ -1,1 +1,0 @@
-msiexec /i RollbackCustomAction.msi /l*vx install.log

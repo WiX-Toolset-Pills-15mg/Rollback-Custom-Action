@@ -86,3 +86,34 @@ The important aspects here are:
 Another important note:
 
 - Because the custom action that we have in this example makes updates to the system, it must be sequenced only in the `InstallExecuteSequence` and not in the `InstallUISequence`. We know that the custom action is one that updates the system because otherwise it makes no sense to have an associated rollback custom action.
+
+## Step 4 - Build and Run
+
+### Install with error and rollback
+
+After build, the installer can be run like this in order to provoke an error and trigger the rollback process:
+
+```
+msiexec /i RollbackCustomAction.msi /l*vx install-with-error.log ERROR_MESSAGE="Crush Boom Bang"
+```
+
+In the `install-with-error.log` file we will find the error message thrown by the `Crush` custom action:
+
+![Crush custom action log with error](log-crush-with-error.png)
+
+And, later in the log, we find that the rollback custom action was run:
+
+![Rollback custom action log](log-rollback.png)
+
+### Install with success
+
+To run the installer without raising an error, success skip the `ERROR_MESSAGE` parameter:
+
+```
+msiexec /i RollbackCustomAction.msi /l*vx install-with-success.log
+```
+
+The log file `install-with-success.log` will contain information about the `Crush` custom action, but no error is thrown and no rollback custom action executed:
+
+![Crush custom action log without error](log-crush-with-success.png)
+

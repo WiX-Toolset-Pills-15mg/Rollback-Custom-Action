@@ -14,34 +14,80 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.RollbackCustomAction.CustomActions.CrushModel;
 using Microsoft.Deployment.WindowsInstaller;
 
 namespace DustInTheWind.RollbackCustomAction.CustomActions
 {
+    // ================================================================================
+    // Step 1 - C# Implementation
+    // ================================================================================
+    //
+    // [Next]: Go to "CustomActions.wxs" file.
+
     public static class CustomActions
     {
+        /// <summary>
+        /// This is a normal custom action implementation.
+        /// </summary>
         [CustomAction]
         public static ActionResult DoSomething(Session session)
         {
-            session.Log("----> [DoSomething] This custom action does something.");
-
-            return ActionResult.Success;
+            session.Log("----> Start DoSomething");
+            try
+            {
+                return ActionResult.Success;
+            }
+            finally
+            {
+                session.Log("----> End DoSomething");
+            }
         }
 
+        /// <summary>
+        /// The rollback custom action's implementation is no different than any other custom action.
+        /// </summary>
         [CustomAction]
         public static ActionResult DoSomethingRollback(Session session)
         {
-            session.Log("----> [DoSomethingRollback] This custom action rolls back what the previous one did.");
-
-            return ActionResult.Success;
+            session.Log("----> Start DoSomethingRollback");
+            try
+            {
+                return ActionResult.Success;
+            }
+            finally
+            {
+                session.Log("----> End DoSomethingRollback");
+            }
         }
 
+        /// <summary>
+        /// This custom action is used just for raising an error.
+        /// </summary>
         [CustomAction]
         public static ActionResult Crush(Session session)
         {
-            session.Log("----> [Crush] This custom action returns failure.");
+            session.Log("----> Start Crush");
+            try
+            {
+                CrushParameters parameters = new CrushParameters(session);
 
-            return ActionResult.Failure;
+                Crush crush = new Crush();
+                crush.Execute(parameters);
+
+                session.Log("Actually, no error occurred.");
+                return ActionResult.Success;
+            }
+            catch (Exception ex)
+            {
+                session.Log($"Error: {ex}");
+                return ActionResult.Failure;
+            }
+            finally
+            {
+                session.Log("----> End Crush");
+            }
         }
     }
 }

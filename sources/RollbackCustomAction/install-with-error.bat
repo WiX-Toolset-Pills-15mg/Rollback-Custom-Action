@@ -1,0 +1,1 @@
+msiexec /i RollbackCustomAction.msi /l*vx install-with-error.log ERROR_MESSAGE="Crush Boom Bang"

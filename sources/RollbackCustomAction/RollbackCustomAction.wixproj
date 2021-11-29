@@ -27,7 +27,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dummy.txt" />
-    <Content Include="install.bat">
+    <Content Include="install-with-error.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="install-with-success.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="uninstall.bat">

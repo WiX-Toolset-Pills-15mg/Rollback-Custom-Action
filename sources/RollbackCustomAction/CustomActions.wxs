@@ -25,6 +25,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Id="CustomActionsBinary"
             SourceFile="$(var.RollbackCustomAction.CustomActions.TargetDir)$(var.RollbackCustomAction.CustomActions.TargetName).CA.dll" />
 
+
+        <!--
+        ================================================================================
+        Step 2 - WiX declarations
+        ================================================================================
+        
+        These are the two interesting custom actions:
+        - The first one is executed as part of the normal installation process.
+        - The second one is the rollback performed when something goes wrong with the installation process in order to revert the changes.
+    
+        [Next]: Go to "Product.wxs" file.
+        -->
+
         <CustomAction
             Id="DoSomething"
             BinaryKey="CustomActionsBinary"
@@ -38,6 +51,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             DllEntry="DoSomethingRollback"
             Execute="rollback"
             Return="check" />
+
+        <!--
+        The only job of this custom action is to return a failure and trigger, in this way, the rollback process.
+        -->
+
+        <CustomAction
+            Id="Crush_SetParameters"
+            Property="Crush"
+            Value="ErrorMessage=[ERROR_MESSAGE]" />
 
         <CustomAction
             Id="Crush"

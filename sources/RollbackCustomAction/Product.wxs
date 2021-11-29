@@ -36,7 +36,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <MediaTemplate />
 
-        <PropertyRef Id="IncludeInstallationScenarios"/>
+        <!--
+        If this property is set, the installer will fail and will run the rollback.
+        -->
+        <Property Id="ERROR_MESSAGE" />
+
+        <PropertyRef Id="IncludeInstallationScenarios" />
 
         <Feature
             Id="ProductFeature"
@@ -46,10 +51,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <ComponentGroupRef Id="FileComponents" />
         </Feature>
 
+
+        <!--
+        ================================================================================
+        Step 3 - Installation sequence
+        ================================================================================
+        
+        The rollback custom action is sequenced before the normal installation custom action.
+        
+        The Crush custom action will return failure (only if the ERROR_MESSAGE property is not empty)
+        and it will trigger, in this way, the rollback process.
+        
+        [Next]: This is the end.
+        -->
+
         <InstallExecuteSequence>
             <Custom Action="DoSomethingRollback" Before="DoSomething">InstallScenario</Custom>
             <Custom Action="DoSomething" After="InstallFiles">InstallScenario</Custom>
 
+            <Custom Action="Crush_SetParameters" Before="Crush">InstallScenario</Custom>
             <Custom Action="Crush" After="DoSomething">InstallScenario</Custom>
         </InstallExecuteSequence>
 
