@@ -2,7 +2,7 @@
 
 ## Description
 
-Sometimes, when we install a product, the environment does not meet all the necessary criteria and some step from the installation process crushes. What happens with the changes made by the previous steps that completed successfully? How can the installer undo those changes?
+Sometimes, when we install a product, the environment does not meet all the necessary criteria and some step from the installation process crushes. What happens with the changes made by the previous steps that already completed successfully? How can the installer undo those changes?
 
 Fore each custom action that does a change in the system we must provide an additional custom action that reverts that change. We call this a rollback custom action.
 
@@ -28,7 +28,12 @@ public static ActionResult DoSomethingRollback(Session session)
 }
 ```
 
-Actually, in C# a custom action that will be later used for rollback has nothing different than a normal custom action. It just needs to be static and have the `CustomAction` attribute as any other custom action.
+The two custom actions may seam to be just two regular custom actions at this level but we must take care of a few aspects:
+
+- **Install custom action is deferred** -  The install custom action (`DoSomething` in our example) must be, later, included in the installer as deferred. The rollback mechanism does not work with immediate custom actions. Because of that, the custom action cannot access the properties of the installer and we must use a special mechanism to pass parameters from WiX and retrieve them in C#.
+  - See the [Deferred Custom Action with Params](https://github.com/WiX-Toolset-Pills-15mg/Deferred-Custom-Action-with-Params) tutorial for more details.
+
+- **Rollback custom action implements the opposite actions** - The rollback custom action (`DoSomethingRollback` in our example) must do the opposite of what the associated install custom action does.
 
 ## Step 2 - WiX declaration
 
@@ -52,9 +57,9 @@ Now let's declare the two custom actions in WiX:
 
 At this level, we need to take care of two things:
 
-- The normal custom action must have `Execute="deferred"`.
-  - The rollback mechanism does not work with immediate custom actions.
-- The rollback custom action must have `Execute="rollback"`.
+- The normal custom action must have `Execute="deferred"` attribute.
+  - As we said previously, the rollback mechanism does not work with immediate custom actions.
+- The rollback custom action must have `Execute="rollback"` attribute.
 
 ## Step 3 - Installation sequence
 

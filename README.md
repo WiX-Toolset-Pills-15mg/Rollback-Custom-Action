@@ -8,7 +8,7 @@ Sometimes, when we install a product, the environment does not meet all the nece
 
 How to implement a rollback custom action?
 
-## How to use
+## How to use this tutorial?
 
 **1) The article**
 
@@ -18,7 +18,7 @@ It will explain in details the steps needed to implement a rollback custom actio
 
 **2) The sources**
 
-The `sources` directory contains a functional example. Scattered throughout the code, you can find short comments that highlight the steps, described in the previously discussed article.
+The `sources` directory contains a functional example. Scattered throughout the code, you can find short comments that highlight the steps, described in the previously mentioned article.
 
 > Hint: Search for the `Step 1` text in the source code.
 
