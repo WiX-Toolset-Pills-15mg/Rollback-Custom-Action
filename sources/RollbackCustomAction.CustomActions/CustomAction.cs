@@ -24,7 +24,7 @@ namespace DustInTheWind.RollbackCustomAction.CustomActions
     // Step 1 - C# Implementation
     // ================================================================================
     //
-    // [Next]: Go to "CustomActions.wxs" file.
+    // NEXT: CustomActions.wxs
 
     public static class CustomActions
     {

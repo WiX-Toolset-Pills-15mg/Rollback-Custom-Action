@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         - The first one is executed as part of the normal installation process.
         - The second one is the rollback performed when something goes wrong with the installation process in order to revert the changes.
     
-        [Next]: Go to "Product.wxs" file.
+        NEXT: Product.wxs
         -->
 
         <CustomAction

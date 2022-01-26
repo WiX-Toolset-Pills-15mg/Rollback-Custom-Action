@@ -18,6 +18,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!--
+====================================================================================================
+START: Overview
+====================================================================================================
+
+TSometimes, when we install a product, the environment does not meet all the necessary criteria and
+some step from the installation process crushes. What happens with the changes made by the previous
+steps that completed successfully? How can the installer undo those changes?
+
+NEXT: CustomAction.cs
+
+-->
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
     <Product
@@ -62,7 +75,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         The Crush custom action will return failure (only if the ERROR_MESSAGE property is not empty)
         and it will trigger, in this way, the rollback process.
         
-        [Next]: This is the end.
+        NEXT: install-with-error.bat
         -->
 
         <InstallExecuteSequence>

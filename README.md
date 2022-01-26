@@ -4,25 +4,32 @@
 
 Sometimes, when we install a product, the environment does not meet all the necessary criteria and some step from the installation process crushes. What happens with the changes made by the previous steps that completed successfully? How can the installer undo those changes?
 
-## Question
+## How to use
 
-How to implement a rollback custom action?
+### a) Tutorial (article)
 
-## How to use this tutorial?
+-  [doc/article/README.md](doc/article/README.md)
+-  This document contains a step-by-step tutorial. You can find there explanations on solving the described problem.
 
-**1) The article**
+### b) Code example
 
-A step-by-step tutorial can be found in the `doc/article/README.md` document, [here](doc/article/README.md).
+- [sources](sources)
+- I provided the complete Visual Studio solution that solves the described problem. Check it out whenever you fill the need to test it by yourself, in your environment or if you have further ideas that you want to verify.
 
-It will explain in details the steps needed to implement a rollback custom action.
+### c) Code notes
 
-**2) The sources**
+- A shorter version of the tutorial can be found directly in the source code. Open Visual Studio solution and search (Ctrl+Shift+F) for the `START` comment, then follow the `Step` comments.
 
-The `sources` directory contains a functional example. Scattered throughout the code, you can find short comments that highlight the steps, described in the previously mentioned article.
+- **Note:** The `NEXT` tags at the end of each comment indicates the file where to search for the next `Step`.
 
-> Hint: Search for the `Step 1` text in the source code.
+### d) Log file examples
 
-Have Fun!
+- [doc/logs](doc/logs)
+- Sometimes a quick look into the log files may be useful, but running the installer each time is cumbersome. I generated the log files for what I thought are the meaningful scenarios and I placed them into this directory. Have a look when needed.
+
+## Suggestions
+
+Any suggestion or opinion is appreciated. Please, feel free to add a [GitHub Issue](https://github.com/WiX-Toolset-Pills-15mg/Rollback-Custom-Action/issues/new?assignees=&labels=&template=feature_request.md&title=).
 
 ## Donations
 
