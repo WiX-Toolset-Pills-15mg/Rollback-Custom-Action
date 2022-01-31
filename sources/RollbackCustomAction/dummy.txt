@@ -1,5 +1,5 @@
-WiX Toolset Pills - Rollback Custom Action
-==============================================================================
+WiX Toolset Pills 15mg - Rollback Custom Action
+====================================================================================================
 
 This file is part of the "Rollback Custom Action" tutorial.
 The tutorial demonstrates how to create a rollback custom action.

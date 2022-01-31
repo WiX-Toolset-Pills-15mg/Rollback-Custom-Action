@@ -1,5 +1,5 @@
 :: ====================================================================================================
-:: Step 4a: Install with error and rollback
+:: Step 4: Install with error and rollback
 :: ====================================================================================================
 ::
 :: Run the installer and look into the "install-with-error.log" file.
