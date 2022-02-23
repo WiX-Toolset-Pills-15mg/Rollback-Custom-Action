@@ -49,24 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Id="DoSomethingRollback"
             BinaryKey="CustomActionsBinary"
             DllEntry="DoSomethingRollback"
-            Execute="rollback"
-            Return="check" />
-
-        <!--
-        The only job of this custom action is to return a failure and trigger, in this way, the rollback process.
-        -->
-
-        <CustomAction
-            Id="Crush_SetParameters"
-            Property="Crush"
-            Value="ErrorMessage=[ERROR_MESSAGE]" />
-
-        <CustomAction
-            Id="Crush"
-            BinaryKey="CustomActionsBinary"
-            DllEntry="Crush"
-            Execute="deferred"
-            Return="check" />
+            Execute="rollback" />
 
     </Fragment>
 </Wix>

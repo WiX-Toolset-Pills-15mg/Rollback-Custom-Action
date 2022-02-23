@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.RollbackCustomAction.CustomActions.CrushModel;
 using Microsoft.Deployment.WindowsInstaller;
 
 namespace DustInTheWind.RollbackCustomAction.CustomActions
@@ -34,14 +32,14 @@ namespace DustInTheWind.RollbackCustomAction.CustomActions
         [CustomAction]
         public static ActionResult DoSomething(Session session)
         {
-            session.Log("----> Start DoSomething");
+            session.Log("--> Start DoSomething");
             try
             {
                 return ActionResult.Success;
             }
             finally
             {
-                session.Log("----> End DoSomething");
+                session.Log("<-- End DoSomething");
             }
         }
 
@@ -51,42 +49,14 @@ namespace DustInTheWind.RollbackCustomAction.CustomActions
         [CustomAction]
         public static ActionResult DoSomethingRollback(Session session)
         {
-            session.Log("----> Start DoSomethingRollback");
+            session.Log("--> Start DoSomethingRollback");
             try
             {
                 return ActionResult.Success;
             }
             finally
             {
-                session.Log("----> End DoSomethingRollback");
-            }
-        }
-
-        /// <summary>
-        /// This custom action is used just for raising an error.
-        /// </summary>
-        [CustomAction]
-        public static ActionResult Crush(Session session)
-        {
-            session.Log("----> Start Crush");
-            try
-            {
-                CrushParameters parameters = new CrushParameters(session);
-
-                Crush crush = new Crush();
-                crush.Execute(parameters);
-
-                session.Log("Actually, no error occurred.");
-                return ActionResult.Success;
-            }
-            catch (Exception ex)
-            {
-                session.Log($"Error: {ex}");
-                return ActionResult.Failure;
-            }
-            finally
-            {
-                session.Log("----> End Crush");
+                session.Log("<-- End DoSomethingRollback");
             }
         }
     }

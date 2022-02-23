@@ -49,13 +49,6 @@ NEXT: CustomAction.cs
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <MediaTemplate />
 
-        <!--
-        If this property is set, the installer will fail and will run the rollback.
-        -->
-        <Property Id="ERROR_MESSAGE" />
-
-        <PropertyRef Id="IncludeInstallationScenarios" />
-
         <Feature
             Id="ProductFeature"
             Title="Rollback Custom Action"
@@ -63,7 +56,6 @@ NEXT: CustomAction.cs
 
             <ComponentGroupRef Id="FileComponents" />
         </Feature>
-
 
         <!--
         ================================================================================
@@ -75,16 +67,33 @@ NEXT: CustomAction.cs
         The Crush custom action will return failure (only if the ERROR_MESSAGE property is not empty)
         and it will trigger, in this way, the rollback process.
         
-        NEXT: install-with-error.bat
+        NEXT: Product.wxs (DOWN)
         -->
 
         <InstallExecuteSequence>
-            <Custom Action="DoSomethingRollback" Before="DoSomething">InstallScenario</Custom>
-            <Custom Action="DoSomething" After="InstallFiles">InstallScenario</Custom>
-
-            <Custom Action="Crush_SetParameters" Before="Crush">InstallScenario</Custom>
-            <Custom Action="Crush" After="DoSomething">InstallScenario</Custom>
+            <Custom Action="DoSomethingRollback" Before="DoSomething">NOT Installed</Custom>
+            <Custom Action="DoSomething" After="InstallFiles">NOT Installed</Custom>
         </InstallExecuteSequence>
+
+        <!--
+        ================================================================================
+        Step 4 - Add the trigger mechanism for failing
+        ================================================================================
+        
+        This "WixFailWhenDeferred" custom action, when included, is inserting itself in
+        the execution sequence.
+
+        The WIXFAILWHENDEFERRED property is controlling the behaviour of the custom
+        action:
+            - if WIXFAILWHENDEFERRED = 1, then the "WixFailWhenDeferred" custom action
+              will fail.
+            - if WIXFAILWHENDEFERRED = anything else, then the "WixFailWhenDeferred"
+              custom action will do nothing.
+        
+        NEXT: install-with-error.bat
+        -->
+
+        <CustomActionRef Id="WixFailWhenDeferred" />
 
     </Product>
 
