@@ -100,7 +100,10 @@ Another important note:
 
 ### Step 4 - Add the trigger mechanism for failing
 
-WiX Toolset provides out of the box a simple mechanism that helps us provoke a failure in our installer.
+WiX Toolset provides out of the box a simple mechanism that helps us provoke a failure in our installer. All we have to do is:
+
+1. reference the `WixUtilExtension.dll` at project level.
+2. reference the `WixFailWhenDeferred` custom action in our `Product.wxs` file:
 
 ```xml
 </Product ...>
