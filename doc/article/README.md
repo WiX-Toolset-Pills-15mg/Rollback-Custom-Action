@@ -100,7 +100,16 @@ Another important note:
 
 ### Step 4 - Add the trigger mechanism for failing
 
+WiX Toolset provides out of the box a simple mechanism that helps us provoke a failure in our installer.
 
+```xml
+</Product ...>
+	...
+	<CustomActionRef Id="WixFailWhenDeferred" />
+</Product>
+```
+
+For more details, please see the [Planned Failure](https://github.com/WiX-Toolset-Pills-15mg/Planned-Failure) pill.
 
 ### Step 5 - Install with error and rollback
 
